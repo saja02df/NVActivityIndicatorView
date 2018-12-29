@@ -4,15 +4,21 @@ PODS:
   - NVActivityIndicatorView/Presenter (4.5.0)
 
 DEPENDENCIES:
-  - NVActivityIndicatorView (from `../`)
+  - NVActivityIndicatorView (from `https://github.com/saja02df/NVActivityIndicatorView.git`, branch `master`)
 
 EXTERNAL SOURCES:
   NVActivityIndicatorView:
-    :path: "../"
+    :branch: master
+    :git: https://github.com/saja02df/NVActivityIndicatorView.git
+
+CHECKOUT OPTIONS:
+  NVActivityIndicatorView:
+    :commit: dab2cbbe18b0fef951f94dd0fa0298b0f1599d7a
+    :git: https://github.com/saja02df/NVActivityIndicatorView.git
 
 SPEC CHECKSUMS:
-  NVActivityIndicatorView: 5a54c8507e71bbb6ce347b9ae0905f61e32dfbcc
+  NVActivityIndicatorView: 1e4e3ed79248cf1666af182593c3a2acf0fcf193
 
-PODFILE CHECKSUM: e5d164996aa6d71a0eda53503111c16d861ecbc6
+PODFILE CHECKSUM: 2dc8e032977bd61e96d930a0c55a3f98b212540c
 
 COCOAPODS: 1.5.3

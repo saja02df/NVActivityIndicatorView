@@ -2,7 +2,7 @@ use_frameworks!
 platform :ios, '9.0'
 
 target 'NVActivityIndicatorViewExample' do
-  pod 'NVActivityIndicatorView'
+  pod 'NVActivityIndicatorView', :git => 'https://github.com/saja02df/NVActivityIndicatorView.git', :branch => 'master'
 
   target 'NVActivityIndicatorViewTests'
 end
