@@ -88,5 +88,24 @@ pipeline {
                 
             }
         }
+
+        stage('Automated Screenshots') {
+
+            steps {
+                echo 'Taking screenshots...'
+
+                dir("Example") {
+                    sh 'fastlane snapshot'
+                }
+
+                // Publish coverage results
+                publishHTML([allowMissing: false, \
+                    alwaysLinkToLastBuild: false, \
+                    keepAll: false, \
+                    reportDir: 'fastlane-screenshots/', \
+                    reportFiles: 'screenshots.html', \
+                    reportName: 'Coverage Report'])
+            }
+        }
     }
 }
