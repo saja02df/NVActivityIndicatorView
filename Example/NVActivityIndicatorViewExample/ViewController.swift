@@ -89,11 +89,11 @@ class ViewController: UIViewController, NVActivityIndicatorViewable {
 
         startAnimating(size, message: "Loading...", type: indicatorType, fadeInAnimation: nil)
 
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1.5) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 4) {
             NVActivityIndicatorPresenter.sharedInstance.setMessage("Authenticating...")
         }
 
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 8) {
             self.stopAnimating(nil)
         }
     }
