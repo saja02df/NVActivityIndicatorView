@@ -84,6 +84,7 @@ pipeline {
                             keepAll: false, \
                             reportDir: 'results/coverage', \
                             reportFiles: 'index.html', \
+                            reportTitles: 'index.html', \
                             reportName: 'Coverage Report'])
                 
             }
@@ -104,6 +105,7 @@ pipeline {
                     keepAll: false, \
                     reportDir: 'fastlane-screenshots/', \
                     reportFiles: 'screenshots.html', \
+                    reportTitles: 'screenshots.html', \
                     reportName: 'Screenshots'])
             }
         }
