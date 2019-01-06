@@ -105,7 +105,7 @@ pipeline {
                 publishHTML([allowMissing: false, \
                     alwaysLinkToLastBuild: false, \
                     keepAll: false, \
-                    reportDir: 'fastlane-screenshots/', \
+                    reportDir: 'Example/fastlane-screenshots/', \
                     reportFiles: 'screenshots.html', \
                     reportTitles: 'screenshots.html', \
                     reportName: 'Screenshots'])
