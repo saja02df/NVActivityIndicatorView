@@ -104,7 +104,7 @@ pipeline {
                     keepAll: false, \
                     reportDir: 'fastlane-screenshots/', \
                     reportFiles: 'screenshots.html', \
-                    reportName: 'Coverage Report'])
+                    reportName: 'Screenshots'])
             }
         }
     }
