@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     environment {
+        PATH = "${HOME}/.fastlane/bin:${PATH}"
         LC_ALL = 'en_US.UTF-8'
         EXPANDED_CODE_SIGN_IDENTITY = "-"
         EXPANDED_CODE_SIGN_IDENTITY_NAME="-"
@@ -10,7 +11,8 @@ pipeline {
     stages {
         stage ('Checkout') {
             steps {
-    
+
+                echo env.PATH
                 echo env.LC_ALL
                 
                 echo 'Deleting current workspace directory....'
