@@ -139,7 +139,7 @@ pipeline {
         stage ('UI_Tests') {
 
             when {
-                expression { ${params.Execute_UI_Tests} == true }
+                expression { params.Execute_UI_Tests == true }
             }
 
             steps {
@@ -180,7 +180,7 @@ pipeline {
         stage('Automated Screenshots') {
 
             when {
-                expression { ${params.Capture_Screenshots} == true }
+                expression { params.Capture_Screenshots == true }
             }
 
             steps {
