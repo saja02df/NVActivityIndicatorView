@@ -11,11 +11,14 @@ pipeline {
     }
 
     parameters {
-        booleanParam(defaultValue: true, description: 'Do we need to run Unit tests?', name: 'executeUITests')
+        booleanParam(defaultValue: true,
+            description: 'Do we need to run Unit tests?',
+            name: 'executeUITests')
     }
 
 	options {
-        timeout(time: 1, unit: 'HOURS')
+        timeout(time: 1,
+        unit: 'HOURS')
     }
 
     stages {
@@ -40,10 +43,10 @@ pipeline {
 
         post {
             success {
-                echo '********** ${STAGE_NAME} - Stage successful! **********'
+                echo "********** ${env.STAGE_NAME} - Stage successful! **********"
             }
             failure {
-                echo '********** ${STAGE_NAME} - Stage Unsuccessful! **********'
+                echo "********** ${env.STAGE_NAME} - Stage Unsuccessful! **********"
             }
         }
     }
@@ -55,6 +58,14 @@ pipeline {
 
             dir("Example") {
                 sh '/usr/local/bin/pod install --verbose'
+            }
+        }
+        post {
+            success {
+                echo "********** ${env.STAGE_NAME} - Stage successful! **********"
+            }
+            failure {
+                echo "********** ${env.STAGE_NAME} - Stage Unsuccessful! **********"
             }
         }
     }
@@ -109,6 +120,14 @@ pipeline {
                         reportName: 'Coverage Report'])
 
         }
+        post {
+            success {
+                echo "********** ${env.STAGE_NAME} - Stage successful! **********"
+            }
+            failure {
+                echo "********** ${env.STAGE_NAME} - Stage Unsuccessful! **********"
+            }
+        }
     }
 
 	stage ('UI_Tests') {
@@ -136,7 +155,16 @@ pipeline {
                     allowEmptyResults: true,
                     testResults: 'build/reports/junit.xml'
                 ])
-	    }
+	        }
+
+            post {
+                success {
+                    echo "********** ${env.STAGE_NAME} - Stage successful! **********"
+                }
+                failure {
+                    echo "********** ${env.STAGE_NAME} - Stage Unsuccessful! **********"
+                }
+            }
         }
 
         stage('Automated Screenshots') {
@@ -157,6 +185,15 @@ pipeline {
                     reportTitles: 'screenshots.html', \
                     reportName: 'Screenshots'])
             }
+            post {
+                success {
+                    echo "********** ${env.STAGE_NAME} - Stage successful! **********"
+                }
+                failure {
+                    echo "********** ${env.STAGE_NAME} - Stage Unsuccessful! **********"
+                }
+            }
         }
     }
 }
+
