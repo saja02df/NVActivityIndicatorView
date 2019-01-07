@@ -1,3 +1,5 @@
+#!/usr/bin/env groovy
+
 pipeline {
     agent any
 
@@ -90,6 +92,34 @@ pipeline {
                             reportName: 'Coverage Report'])
                 
             }
+        }
+
+	stage ('UI_Tests') {
+            
+            steps {
+                echo 'Starting build plus UI Tests...'
+                sh 'xcodebuild \
+                        -workspace "./Example/NVActivityIndicatorViewExample.xcworkspace" \
+                        -scheme "NVActivityIndicatorViewExampleUITests" \
+                        -configuration "Debug" \
+                        build  \
+                        test \
+                        -derivedDataPath build/ \
+                        -resultBundlePath results/ \
+                        -destination "platform=iOS Simulator,name=iPhone XR,OS=12.1" \
+                        -enableCodeCoverage NO \
+                        CODE_SIGN_IDENTITY="" \
+                        CODE_SIGNING_REQUIRED="NO" \
+                        CODE_SIGN_ENTITLEMENTS="" \
+                        CODE_SIGNING_ALLOWED="NO" \
+                        | /usr/local/bin/xcpretty -r junit'
+
+                // Publish unit test restults...
+                step([$class: 'JUnitResultArchiver', 
+                    allowEmptyResults: true,
+                    testResults: 'build/reports/junit.xml'
+                ])
+	    }
         }
 
         stage('Automated Screenshots') {
