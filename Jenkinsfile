@@ -105,7 +105,7 @@ pipeline {
                         build  \
                         test \
                         -derivedDataPath build/ \
-                        -resultBundlePath results/ \
+                        -resultBundlePath results_uitests/ \
                         -destination "platform=iOS Simulator,name=iPhone XR,OS=12.1" \
                         -enableCodeCoverage NO \
                         CODE_SIGN_IDENTITY="" \
