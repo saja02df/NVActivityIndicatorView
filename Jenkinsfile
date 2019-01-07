@@ -10,10 +10,18 @@ pipeline {
         EXPANDED_CODE_SIGN_IDENTITY_NAME="-"
     }
 
+    parameters {
+        booleanParam(defaultValue: true, description: 'Do we need to run Unit tests?', name: 'executeUITests')
+    }
+
+	options {
+        timeout(time: 0.33, unit: 'HOURS')
+    }
+
     stages {
         stage ('Checkout') {
             steps {
-
+            echo "Flags: ${params.executeUITests}"
                 echo env.PATH
                 echo env.LC_ALL
                 
@@ -29,70 +37,79 @@ pipeline {
                     userRemoteConfigs: [[url: 'https://github.com/saja02df/NVActivityIndicatorView']]
                 ])
             }
-        }
-        
-        stage('Dependecies') {
-            
-            steps {
-                echo 'Fetching dependencies...'
 
-                dir("Example") {
-                    sh '/usr/local/bin/pod install --verbose'
-                }                
+        post {
+            success {
+                echo '********** ${STAGE_NAME} - Stage successful! **********'
+            }
+            failure {
+                echo '********** ${STAGE_NAME} - Stage Unsuccessful! **********'
             }
         }
-        
-        stage ('Build/Test') {
-            
-            steps {
-                echo 'Starting build plus test...'
-                sh 'env'
-                sh 'xcodebuild \
-                        -workspace "./Example/NVActivityIndicatorViewExample.xcworkspace" \
-                        -scheme "NVActivityIndicatorViewTests" \
-                        -configuration "Debug" \
-                        build  \
-                        test \
-                        -derivedDataPath build/ \
-                        -resultBundlePath results/ \
-                        -destination "platform=iOS Simulator,name=iPhone XR,OS=12.1" \
-                        -enableCodeCoverage YES \
-                        CODE_SIGN_IDENTITY="" \
-                        CODE_SIGNING_REQUIRED="NO" \
-                        CODE_SIGN_ENTITLEMENTS="" \
-                        CODE_SIGNING_ALLOWED="NO" \
-                        | tee xcodebuild.log \
-                        | /usr/local/bin/xcpretty -r junit'
+    }
 
-                // Publish unit test restults...
-                step([$class: 'JUnitResultArchiver', 
-                    allowEmptyResults: true,
-                    testResults: 'build/reports/junit.xml'
-                ])
-                
-                echo 'Extracting code coverage...'
-                sh '/usr/local/bin/slather \
-                    coverage \
-                    --html \
-                    --scheme NVActivityIndicatorViewTests \
-                    --build-directory build \
-                    --output-directory results/coverage \
-                    --workspace Example/NVActivityIndicatorViewExample.xcworkspace \
-                    Example/NVActivityIndicatorViewExample.xcodeproj'
-                    
-                echo 'Publishing Code coverage report...'
-                
-                // Publish coverage results
-                publishHTML([allowMissing: false, \
-                            alwaysLinkToLastBuild: false, \
-                            keepAll: false, \
-                            reportDir: 'results/coverage', \
-                            reportFiles: 'index.html', \
-                            reportTitles: 'index.html', \
-                            reportName: 'Coverage Report'])
-                
+    stage('Dependecies') {
+
+        steps {
+            echo 'Fetching dependencies...'
+
+            dir("Example") {
+                sh '/usr/local/bin/pod install --verbose'
             }
         }
+    }
+
+    stage ('Build/Test') {
+
+        steps {
+            echo 'Starting build plus test...'
+            sh 'env'
+            sh 'xcodebuild \
+                    -workspace "./Example/NVActivityIndicatorViewExample.xcworkspace" \
+                    -scheme "NVActivityIndicatorViewTests" \
+                    -configuration "Debug" \
+                    build  \
+                    test \
+                    -derivedDataPath build/ \
+                    -resultBundlePath results/ \
+                    -destination "platform=iOS Simulator,name=iPhone XR,OS=12.1" \
+                    -enableCodeCoverage YES \
+                    CODE_SIGN_IDENTITY="" \
+                    CODE_SIGNING_REQUIRED="NO" \
+                    CODE_SIGN_ENTITLEMENTS="" \
+                    CODE_SIGNING_ALLOWED="NO" \
+                    | tee xcodebuild.log \
+                    | /usr/local/bin/xcpretty -r junit'
+
+            // Publish unit test restults...
+            step([$class: 'JUnitResultArchiver',
+                allowEmptyResults: true,
+                testResults: 'build/reports/junit.xml'
+            ])
+
+            echo 'Extracting code coverage...'
+            sh '/usr/local/bin/slather \
+                coverage \
+                --html \
+                --scheme NVActivityIndicatorViewTests \
+                --build-directory build \
+                --output-directory results/coverage \
+                --workspace Example/NVActivityIndicatorViewExample.xcworkspace \
+                Example/NVActivityIndicatorViewExample.xcodeproj'
+
+            echo 'Publishing Code coverage report...'
+
+            // Publish coverage results
+            publishHTML([allowMissing: false, \
+                        alwaysLinkToLastBuild: false, \
+                        keepAll: false, \
+                        reportDir: 'results/coverage', \
+                        reportFiles: 'index.html', \
+                        reportTitles: 'index.html', \
+                        reportName: 'Coverage Report'])
+
+        }
+    }
 
 	stage ('UI_Tests') {
             
