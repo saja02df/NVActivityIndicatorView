@@ -214,10 +214,15 @@ pipeline {
             steps {
                 echo 'Starting stage - ${env.STAGE_NAME} ...'
 
-                sh 'xcodebuild \
-                    archive -workspace "./Example/NVActivityIndicatorViewExample.xcworkspace" \
+                sh 'xcodebuild archive \
+                    -workspace "./Example/NVActivityIndicatorViewExample.xcworkspace" \
                     -scheme NVActivityIndicatorViewExample \
                     -archivePath ./Result.xcarchive'
+
+                sh 'xcodebuild -exportArchive\
+                    -archivePath ./Result.xcarchive \
+                    -exportPath ./Result.ipa \
+                    -exportOptionsPlist ./ExportOptions.plist'
 
             }
             post {
