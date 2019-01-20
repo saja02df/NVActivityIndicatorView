@@ -215,7 +215,7 @@ pipeline {
                 echo 'Starting stage - ${env.STAGE_NAME} ...'
 
                 sh 'xcodebuild \
-                    archive -workspace NVActivityIndicatorViewExample.xcworkspace \
+                    archive -workspace "./Example/NVActivityIndicatorViewExample.xcworkspace" \
                     -scheme NVActivityIndicatorViewExample \
                     -archivePath ./Result.xcarchive'
 
