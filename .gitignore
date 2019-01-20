@@ -66,3 +66,4 @@ fastlane/screenshots
 fastlane/test_output
 Example/fastlane/screenshots
 Example/fastlane-screenshots
+IDEWorkspaceChecks.plist
