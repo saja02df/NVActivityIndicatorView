@@ -221,7 +221,7 @@ pipeline {
 
                 sh 'xcodebuild -exportArchive\
                     -archivePath ./Result.xcarchive \
-                    -exportPath ./Result.ipa \
+                    -exportPath ./BuildArtifacts \
                     -exportOptionsPlist ./ExportOptions.plist'
 
             }
