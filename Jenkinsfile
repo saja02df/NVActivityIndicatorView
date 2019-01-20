@@ -208,6 +208,27 @@ pipeline {
                 }
             }
         }
+
+        stage ('IPA Creation') {
+
+            steps {
+                echo 'Starting stage - ${env.STAGE_NAME} ...'
+
+                sh 'xcodebuild \
+                    archive -workspace NVActivityIndicatorViewExample.xcworkspace \
+                    -scheme NVActivityIndicatorViewExample \
+                    -archivePath ./Result.xcarchive'
+
+            }
+            post {
+                success {
+                    echo "********** ${env.STAGE_NAME} - Stage successful! **********"
+                }
+                failure {
+                    echo "********** ${env.STAGE_NAME} - Stage Unsuccessful! **********"
+                }
+            }
+        }
     }
 }
 
