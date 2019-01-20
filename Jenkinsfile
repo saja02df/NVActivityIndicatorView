@@ -96,7 +96,7 @@ pipeline {
                         CODE_SIGN_ENTITLEMENTS="" \
                         CODE_SIGNING_ALLOWED="NO" \
                         | tee xcodebuild.log \
-                        | /usr/local/bin/xcpretty -r junit'
+                        | /usr/local/bin/xcpretty -r junit && exit ${PIPESTATUS[0]}'
 
                 // Publish unit test restults...
                 step([$class: 'JUnitResultArchiver',
@@ -158,7 +158,7 @@ pipeline {
                         CODE_SIGNING_REQUIRED="NO" \
                         CODE_SIGN_ENTITLEMENTS="" \
                         CODE_SIGNING_ALLOWED="NO" \
-                        | /usr/local/bin/xcpretty -r junit'
+                        | /usr/local/bin/xcpretty -r junit && exit ${PIPESTATUS[0]}'
 
                 // Publish unit test restults...
                 step([$class: 'JUnitResultArchiver',
