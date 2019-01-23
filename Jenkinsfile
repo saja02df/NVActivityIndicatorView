@@ -226,7 +226,7 @@ pipeline {
                 dir("SigningEntities/CICD_NVAvtivity") {
                     sh 'openssl enc -aes-256-cbc -d -a -in 3eb34f9b-e17a-4403-85c8-82337390bf7b.enc.mobileprovision -out 3eb34f9b-e17a-4403-85c8-82337390bf7b.mobileprovision -k 12345'
 
-                    sh 'openssl enc -aes-256-cbc -d -a -in DevCertSampleNVActivity.enc.p12 -out DevCertSampleNVActivity.p12 -k 12345'
+                    sh 'openssl enc -aes-256-cbc -d -a -in DevCertSampleNVActivity.enc.p12 -out DevCertSampleNVActivity.p12 -k 112233'
 
                     sh 'security create-keychain -p 112233 SigningEntities'
                     sh 'security list-keychains -s SigningEntities'
