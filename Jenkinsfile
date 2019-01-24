@@ -83,7 +83,7 @@ pipeline {
             steps {
                 echo 'Starting build plus test...'
                 sh 'env'
-                sh 'xcodebuild \
+                sh 'xcrun xcodebuild \
                         -workspace "./Example/NVActivityIndicatorViewExample.xcworkspace" \
                         -scheme "NVActivityIndicatorViewTests" \
                         -configuration "Debug" \
@@ -146,7 +146,7 @@ pipeline {
 
             steps {
                 echo 'Starting build plus UI Tests...'
-                sh 'xcodebuild \
+                sh 'xcrun xcodebuild \
                         -workspace "./Example/NVActivityIndicatorViewExample.xcworkspace" \
                         -scheme "NVActivityIndicatorViewExampleUITests" \
                         -configuration "Debug" \
@@ -257,13 +257,13 @@ pipeline {
 
 
                 // Archive build
-                sh 'xcodebuild archive \
+                sh 'xcrun xcodebuild archive \
                     -workspace "./Example/NVActivityIndicatorViewExample.xcworkspace" \
                     -scheme NVActivityIndicatorViewExample \
                     -archivePath ./Result.xcarchive'
 
                 // Create IPA
-                sh 'xcodebuild -exportArchive\
+                sh 'xcrun xcodebuild -exportArchive\
                     -archivePath ./Result.xcarchive \
                     -exportPath ./BuildArtifacts \
                     -exportOptionsPlist ./ExportOptions.plist'
