@@ -8,6 +8,9 @@ pipeline {
         LC_ALL = 'en_US.UTF-8'
         EXPANDED_CODE_SIGN_IDENTITY = "-"
         EXPANDED_CODE_SIGN_IDENTITY_NAME="-"
+
+        // Set the below environment variable property to point to the correct XCode version
+        // Also, ensure the destination is selected as per the XCode version selected
         DEVELOPER_DIR="${HOME}/Home/Software/XCode/Xcode.app/Contents/Developer"
     }
 
@@ -92,7 +95,7 @@ pipeline {
                         test \
                         -derivedDataPath build/ \
                         -resultBundlePath results/ \
-                        -destination "platform=iOS Simulator,name=iPhone XR,OS=12.1" \
+                        -destination "platform=iOS Simulator,name=iPhone XR,OS=12.0" \
                         -enableCodeCoverage YES \
                         CODE_SIGN_IDENTITY="" \
                         CODE_SIGNING_REQUIRED="NO" \
