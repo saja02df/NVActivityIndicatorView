@@ -3,6 +3,8 @@
 pipeline {
     agent any
 
+    def mainRepoURL = 'https://github.com/saja02df/NVActivityIndicatorView'
+
     environment {
         PATH = "${HOME}/.fastlane/bin:${PATH}"
         LC_ALL = 'en_US.UTF-8'
@@ -43,7 +45,7 @@ pipeline {
                     doGenerateSubmoduleConfigurations: false, 
                     extensions: [[$class: 'CleanBeforeCheckout']], 
                     submoduleCfg: [], 
-                    userRemoteConfigs: [[url: 'https://github.com/saja02df/NVActivityIndicatorView']]
+                    userRemoteConfigs: [[url: ${mainRepoURL}]]
                 ])
             }
 
