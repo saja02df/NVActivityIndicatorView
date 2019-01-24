@@ -1,9 +1,7 @@
 #!/usr/bin/env groovy
 
 // Global vars
-define {
-    def mainRepoURL = 'https://github.com/saja02df/NVActivityIndicatorView'
-}
+def mainRepoURL
 
 pipeline {
     agent any
@@ -35,6 +33,9 @@ pipeline {
     stages {
 
         stage ('Checkout') {
+
+            mainRepoURL = 'https://github.com/saja02df/NVActivityIndicatorView'
+
             steps {
             echo "Flags: ${params.executeUITests}"
                 echo env.PATH
