@@ -232,8 +232,8 @@ pipeline {
                     sh 'security unlock-keychain -p 112233 SigningEntities'
                     sh 'security list-keychains -s SigningEntities'
 
-                    sh 'security set-key-partition-list -S apple-tool:,apple: -s -k 112233 SigningEntities'
                     sh 'security import DevCertSampleNVActivity.p12 -P 112233 -k SigningEntities -A'
+                    sh 'security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k 112233 SigningEntities'
 
                     sh "cp 3eb34f9b-e17a-4403-85c8-82337390bf7b.mobileprovision ~/Library/MobileDevice/Provisioning\\ Profiles/3eb34f9b-e17a-4403-85c8-82337390bf7b.mobileprovision"
 
