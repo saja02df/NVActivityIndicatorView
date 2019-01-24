@@ -1,8 +1,5 @@
 #!/usr/bin/env groovy
 
-// Global vars
-def mainRepoURL
-
 pipeline {
     agent any
 
@@ -35,8 +32,6 @@ pipeline {
         stage ('Checkout') {
 
             steps {
-            mainRepoURL = 'https://github.com/saja02df/NVActivityIndicatorView'
-
             echo "Flags: ${params.executeUITests}"
                 echo env.PATH
                 echo env.LC_ALL
@@ -50,7 +45,7 @@ pipeline {
                     doGenerateSubmoduleConfigurations: false, 
                     extensions: [[$class: 'CleanBeforeCheckout']], 
                     submoduleCfg: [], 
-                    userRemoteConfigs: [[url: ${mainRepoURL}]]
+                    userRemoteConfigs: [[url: 'https://github.com/saja02df/NVActivityIndicatorView']]
                 ])
             }
 
