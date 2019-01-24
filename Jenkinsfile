@@ -8,6 +8,7 @@ pipeline {
         LC_ALL = 'en_US.UTF-8'
         EXPANDED_CODE_SIGN_IDENTITY = "-"
         EXPANDED_CODE_SIGN_IDENTITY_NAME="-"
+        DEVELOPER_DIR="${HOME}/Home/Software/XCode/Xcode.app/Contents/Developer"
     }
 
     parameters {
