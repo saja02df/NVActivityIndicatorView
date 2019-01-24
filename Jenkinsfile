@@ -1,5 +1,9 @@
 #!/usr/bin/env groovy
 
+// Global vars
+mainRepoURL = 'https://github.com/saja02df/NVActivityIndicatorView'
+
+
 pipeline {
     agent any
 
@@ -28,9 +32,6 @@ pipeline {
     }
 
     stages {
-
-    def mainRepoURL = 'https://github.com/saja02df/NVActivityIndicatorView'
-
 
         stage ('Checkout') {
             steps {
