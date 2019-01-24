@@ -12,6 +12,10 @@ pipeline {
         // Set the below environment variable property to point to the correct XCode version
         // Also, ensure the destination is selected as per the XCode version selected
         DEVELOPER_DIR="${HOME}/Home/Software/XCode/Xcode.app/Contents/Developer"
+
+        // Credentials
+        KEYCHAIN_PASSCODE = credentials('jenkins_sample_nvactivity_temp_keychain_passcode')
+        PRIVATE_KEY_PASSCODE = credentials('jenkins_sample_nvactivity_private_key_passcode')
     }
 
     parameters {
@@ -240,20 +244,20 @@ pipeline {
                     sh 'openssl enc -aes-256-cbc -d -a -in DevCertSampleNVActivity.enc.p12 -out DevCertSampleNVActivity.p12 -k 112233'
 
                     // Create temporary keychain
-                    sh 'security create-keychain -p 112233 SigningEntities'
+                    sh "security create-keychain -p $KEYCHAIN_PASSCODE SigningEntities"
 
                     // Unlock temporary keychain
-                    sh 'security unlock-keychain -p 112233 SigningEntities'
+                    sh "security unlock-keychain -p $KEYCHAIN_PASSCODE SigningEntities"
 
                     // Make temporary keychain visible
                     sh 'security list-keychains -s SigningEntities'
 
                     // Import certificate to keychain
-                    sh 'security import DevCertSampleNVActivity.p12 -P 112233 -k SigningEntities -T /usr/bin/codesign -T /usr/bin/security'
+                    sh 'security import DevCertSampleNVActivity.p12 -P $PRIVATE_KEY_PASSCODE -k SigningEntities -T /usr/bin/codesign -T /usr/bin/security'
 
                     // If we do not do this step, we see a UI permission dislog from Codesign to allow using keychain entities.
                     // See - https://stackoverflow.com/questions/39868578/security-codesign-in-sierra-keychain-ignores-access-control-settings-and-ui-p
-                    sh 'security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k 112233 SigningEntities'
+                    sh "security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k $KEYCHAIN_PASSCODE SigningEntities"
 
                     // Copy provisioning profile to the right directory
                     sh "cp 3eb34f9b-e17a-4403-85c8-82337390bf7b.mobileprovision ~/Library/MobileDevice/Provisioning\\ Profiles/3eb34f9b-e17a-4403-85c8-82337390bf7b.mobileprovision"
