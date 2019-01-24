@@ -34,9 +34,9 @@ pipeline {
 
         stage ('Checkout') {
 
+            steps {
             mainRepoURL = 'https://github.com/saja02df/NVActivityIndicatorView'
 
-            steps {
             echo "Flags: ${params.executeUITests}"
                 echo env.PATH
                 echo env.LC_ALL
