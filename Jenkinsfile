@@ -1,8 +1,9 @@
 #!/usr/bin/env groovy
 
 // Global vars
-mainRepoURL = 'https://github.com/saja02df/NVActivityIndicatorView'
-
+define {
+    def mainRepoURL = 'https://github.com/saja02df/NVActivityIndicatorView'
+}
 
 pipeline {
     agent any
@@ -15,7 +16,7 @@ pipeline {
     }
 
     parameters {
-        booleanParam(defaultValue: true,
+        booleanParam(defaultValue: false,
             description: 'Enable UI Test execution.',
             name: 'Execute_UI_Tests')
 
