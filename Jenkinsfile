@@ -229,17 +229,16 @@ pipeline {
                     sh 'openssl enc -aes-256-cbc -d -a -in DevCertSampleNVActivity.enc.p12 -out DevCertSampleNVActivity.p12 -k 112233'
 
                     sh 'security create-keychain -p 112233 SigningEntities'
-                    sh 'security list-keychains -s SigningEntities'
                     sh 'security unlock-keychain -p 112233 SigningEntities'
+                    sh 'security list-keychains -s SigningEntities'
 
+                    sh 'security set-key-partition-list -S apple-tool:,apple: -s -k 112233 SigningEntities'
                     sh 'security import DevCertSampleNVActivity.p12 -P 112233 -k SigningEntities -A'
 
                     sh "cp 3eb34f9b-e17a-4403-85c8-82337390bf7b.mobileprovision ~/Library/MobileDevice/Provisioning\\ Profiles/3eb34f9b-e17a-4403-85c8-82337390bf7b.mobileprovision"
 
                 }
 
-                sh 'security unlock-keychain -p 112233 SigningEntities'
-                sleep(5)
 
                 sh 'xcodebuild archive \
                     -workspace "./Example/NVActivityIndicatorViewExample.xcworkspace" \
