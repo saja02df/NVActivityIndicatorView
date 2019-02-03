@@ -237,7 +237,7 @@ pipeline {
                     userRemoteConfigs: [[url: 'git@github.com:saja02df/MyTestRepo.git']]])
 
                 // Setup up siginig certificate and provisioning profile.
-                dir("SigningEntities/CICD_NVAvtivity") {
+                dir("SigningEntities/CICD_NVAvtivity") { 
 
                     // Decrypt provisioning profile
                     sh 'openssl enc -aes-256-cbc -d -a -in 3eb34f9b-e17a-4403-85c8-82337390bf7b.enc.mobileprovision -out 3eb34f9b-e17a-4403-85c8-82337390bf7b.mobileprovision -k $FILE_DECRYPT_PASSCODE'
