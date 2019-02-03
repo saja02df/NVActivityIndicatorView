@@ -234,7 +234,7 @@ pipeline {
                     doGenerateSubmoduleConfigurations: false,
                     extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'SigningEntities']],
                     submoduleCfg: [],
-                    userRemoteConfigs: [[url: 'https://github.com/saja02df/MyTestRepo.git']]])
+                    userRemoteConfigs: [[url: 'git@github.com:saja02df/MyTestRepo.git']]])
 
                 // Setup up siginig certificate and provisioning profile.
                 dir("SigningEntities/CICD_NVAvtivity") {
