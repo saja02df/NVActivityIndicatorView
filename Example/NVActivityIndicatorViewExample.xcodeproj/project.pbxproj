@@ -59,7 +59,6 @@
 		337336AC21E1EBB80044A650 /* NVActivityIndicatorViewExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NVActivityIndicatorViewExampleUITests.swift; sourceTree = "<group>"; };
 		337336AE21E1EBB80044A650 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		337336B521E1F7860044A650 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
-		33BCCB8E21E212300048EBDB /* Jenkinsfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Jenkinsfile; path = ../../Jenkinsfile; sourceTree = "<group>"; };
 		38F46932CB46A4F90581B5EC /* Pods-NVActivityIndicatorViewExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NVActivityIndicatorViewExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-NVActivityIndicatorViewExample/Pods-NVActivityIndicatorViewExample.release.xcconfig"; sourceTree = "<group>"; };
 		82D66FD30FA667D1982E7D46 /* Pods_NVActivityIndicatorViewExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NVActivityIndicatorViewExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C15A1AC45077E8F3A6BFFE62 /* Pods-NVActivityIndicatorViewExample-NVActivityIndicatorViewTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NVActivityIndicatorViewExample-NVActivityIndicatorViewTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NVActivityIndicatorViewExample-NVActivityIndicatorViewTests/Pods-NVActivityIndicatorViewExample-NVActivityIndicatorViewTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -118,7 +117,6 @@
 		1F0326F01F0D28CC00BF3358 = {
 			isa = PBXGroup;
 			children = (
-				33BCCB8D21E212070048EBDB /* Jenkins */,
 				337336B421E1F7690044A650 /* UITests */,
 				1F0326FB1F0D28CC00BF3358 /* NVActivityIndicatorViewExample */,
 				1F03272A1F0D399F00BF3358 /* NVActivityIndicatorViewTests */,
@@ -179,14 +177,6 @@
 				337336B521E1F7860044A650 /* SnapshotHelper.swift */,
 			);
 			path = UITests;
-			sourceTree = "<group>";
-		};
-		33BCCB8D21E212070048EBDB /* Jenkins */ = {
-			isa = PBXGroup;
-			children = (
-				33BCCB8E21E212300048EBDB /* Jenkinsfile */,
-			);
-			path = Jenkins;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
