@@ -1,0 +1,8 @@
+<div class="row comments-row">
+	<h2>Comments</h2>
+	<div class="comment-field">
+		<textarea rows="4" id="Create_Body"></textarea>
+	</div>
+	<input type="button" id="Create_Submit" value="Add Comment" onclick="Create('Page Comments');" />
+</div>
+<div class="comment-list"></div>

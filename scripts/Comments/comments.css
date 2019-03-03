@@ -1,0 +1,97 @@
+/* comments */
+.row {
+    clear: both;
+}
+.row:before, .row:after {
+    content: " ";
+    display: table;
+}
+.row:after {
+    clear: both;
+}
+.row {
+    *zoom: 1;
+}
+.comment-wrapper {
+    border-bottom: 1px solid #ccc;
+    padding: 30px 20px 30px 90px;
+    background:url('../img/comments.png') no-repeat 20px 25px;
+}
+.comment-wrapper.alternate {
+    background-color: #f9f9f9;
+}
+.comment-wrapper:first-child {
+    border-top: 1px solid #ccc;
+    margin: 20px 0 0;
+}
+.comment-field {
+	padding:10px;
+	background:#f9f9f9;
+}
+#Create_Body {
+    width: 100%;
+    padding:0;
+    border:none;
+    background:none;
+}
+#Create_Submit {
+	float:right;
+}
+.comment-time {
+    font-size: 12px;
+}
+.comment-author {
+    font-size: 24px;
+    line-height:23px;
+}
+.comment-time {
+    font-size: 12px;
+}
+.comment-list {
+    padding-bottom: 30px;
+}
+.comment-body {
+    padding-top: 20px;
+}
+.comment-author-image {
+    float: left;
+    max-width: 40px;
+}
+.comment-author-image > img {
+    display: block;
+    width: 100%;
+}
+.comment-tools {
+    float: right;
+}
+.comment-delete > a, .comment-edit > a, .comment-save > a, .comment-cancel > a {
+    cursor: pointer;
+}
+.author-info {
+    margin-right: 75px;
+}
+.comment-update {
+    border: 1px solid #999;
+    margin-right: 120px;
+    padding: 10px;
+}
+.comment-update > textarea {
+    background: none;
+    border: none;
+    padding: 0;
+    width: 100%;
+    font-size:14px;
+}
+.comments a {
+	color:#849895;
+}
+.comments {
+	float:left;
+}
+.comments-count {
+    cursor: default;
+    display: inline;
+    font-weight: bold;
+    position: relative;
+}
+/* /comments */
