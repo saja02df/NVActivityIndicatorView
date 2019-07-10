@@ -1,0 +1,107 @@
+class InvertedButton: UIButton {
+
+    func styleButton(isSelected:Bool = true) {
+        
+        self.layer.cornerRadius = self.frame.size.height / 2
+        self.layer.borderWidth = 2.0
+        self.layer.borderColor = UIColor.red.cgColor
+        self.setCustomSelectedStateStyle(isSelected: isSelected)
+        
+    }
+    
+    func setCustomSelectedStateStyle(isSelected:Bool) {
+        if isSelected {
+            self.backgroundColor = UIColor.red
+            self.setTitleColor(UIColor.white,
+                               for: .normal)
+            
+        } else {
+            self.backgroundColor = UIColor.white
+            self.setTitleColor(UIColor.red,
+                               for: .normal)
+        }
+    }
+}
+
+
+enum ToggleButtonTags: Int {
+    case firstButton = 0
+    case secondButton
+}
+
+enum ButtonMode {
+    case onlyMentees
+    case onlyMentors
+    case both
+}
+
+class ViewController: UIViewController {
+
+    @IBOutlet weak var firstButton: InvertedButton!
+    @IBOutlet weak var secondButton: InvertedButton!
+    @IBOutlet weak var firstBtnCenterConstraint: NSLayoutConstraint!
+
+    var mode:ButtonMode = .both
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.configureButtons()
+    }
+
+    func configureButtons() {
+        firstButton.tag = ToggleButtonTags.firstButton.rawValue
+        firstButton.styleButton(isSelected: true)
+        firstButton.addTarget(self,
+                              action: #selector(buttonAction(_:)),
+                              for: .touchUpInside)
+
+        switch self.mode {
+            
+        case .onlyMentees:
+            firstBtnCenterConstraint.constant = 0
+            firstButton.setTitle("Mentees", for: .normal)
+            firstButton.isEnabled = false
+            secondButton.isHidden = true
+        case .onlyMentors:
+            firstBtnCenterConstraint.constant = 0
+            firstButton.setTitle("Mentors", for: .normal)
+            firstButton.isEnabled = false
+            secondButton.isHidden = true
+        case .both:
+            secondButton.isHidden = false
+            firstBtnCenterConstraint.constant = -40
+            self.view.setNeedsDisplay()
+            firstButton.isEnabled = true
+
+            firstButton.setTitle("Mentees", for: .normal)
+            secondButton.setTitle("Mentors", for: .normal)
+
+            secondButton.tag = ToggleButtonTags.secondButton.rawValue
+            
+            secondButton.styleButton(isSelected: false)
+            
+            secondButton.addTarget(self,
+                                   action: #selector(buttonAction(_:)),
+                                   for: .touchUpInside)
+
+        }
+    }
+    
+    @objc func buttonAction(_ sender:UIButton!)
+    {
+        var firstButtonSelected = true
+        var secondButtonSelected = false
+        
+        if sender.tag == ToggleButtonTags.firstButton.rawValue {
+            firstButtonSelected = true
+            secondButtonSelected = false
+        } else {
+            firstButtonSelected = false
+            secondButtonSelected = true
+        }
+        
+        self.firstButton.setCustomSelectedStateStyle(isSelected: firstButtonSelected)
+        self.secondButton.setCustomSelectedStateStyle(isSelected: secondButtonSelected)
+    }
+}
